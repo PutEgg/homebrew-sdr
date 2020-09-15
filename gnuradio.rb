@@ -15,7 +15,7 @@ class Gnuradio < Formula
   depends_on 'pyqt'
   depends_on 'pyqwt'
 
-  def options
+  def options do
     [
       ['--with-qt', 'Build gr-qtgui.'],
     ]
