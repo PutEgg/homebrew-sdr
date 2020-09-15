@@ -15,11 +15,16 @@ class Gnuradio < Formula
   depends_on 'pyqt'
   depends_on 'pyqwt'
 
-  def options
-    [
-      ['--with-qt'],
-    ]
+require 'optparse'
+
+options = {}
+option_parser = OptionParser.new do |opts|
+  opts.banner = 'kk'
+  options[:switch] = false
+  opts.on('-wq', '--with-qt', 'Build gr-qtgui.') do
+    options[:switch] = true
   end
+end.parse!
 
   def install
     ENV.prepend_create_path 'PYTHONPATH', libexec+'lib/python2.7/site-packages'
@@ -27,7 +32,7 @@ class Gnuradio < Formula
 
     mkdir 'build' do
       args = ["-DCMAKE_PREFIX_PATH=#{prefix}", "-DQWT_INCLUDE_DIRS=#{HOMEBREW_PREFIX}/lib/qwt.framework/Headers", "-DQWT_LIBRARIES=#{HOMEBREW_PREFIX}/lib/qwt.framework/qwt", ] + std_cmake_args
-      args << '-DENABLE_GR_QTGUI=OFF' unless ARGV.include?('--with-qt')
+      args << '-DENABLE_GR_QTGUI=OFF' unless optionns[:switch]=true
 
       python_prefix = `python-config --prefix`.strip
 
