@@ -32,7 +32,7 @@ end.parse!
 
     mkdir 'build' do
       args = ["-DCMAKE_PREFIX_PATH=#{prefix}", "-DQWT_INCLUDE_DIRS=#{HOMEBREW_PREFIX}/lib/qwt.framework/Headers", "-DQWT_LIBRARIES=#{HOMEBREW_PREFIX}/lib/qwt.framework/qwt", ] + std_cmake_args
-      args << '-DENABLE_GR_QTGUI=OFF' unless optionns[:switch]=true
+      args << '-DENABLE_GR_QTGUI=OFF' unless options[:switch]=true
 
       python_prefix = `python-config --prefix`.strip
 
